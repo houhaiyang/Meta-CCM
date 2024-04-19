@@ -34,7 +34,7 @@ Requirements: python>=3.11, numpy, pandas, scikit-learn.
 
 Pay attention to the installation of scikit-learn package.
 
-##### 1st | Install numpy scipy matplotlib
+##### 1st | Install numpy scipy joblib
 ```commandline
 pip install numpy pandas scipy joblib -i https://pypi.mirrors.ustc.edu.cn/simple/
 ```
