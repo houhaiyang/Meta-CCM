@@ -53,7 +53,7 @@ pip install metaccm==0.3.0
 ```
 Install through local:
 ```commandline
-pip install dist/metaccm-0.2.0-py3-none-any.whl
+pip install dist/metaccm-0.3.0-py3-none-any.whl
 ```
 
 -------------
