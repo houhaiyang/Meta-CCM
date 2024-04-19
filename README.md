@@ -7,7 +7,7 @@
 
 - Author: Haiyang Hou
 - Date: 2024-04-18
-- Version: v0.2.0
+- Version: v0.3.0
 - If you want to use this package, please indicate the source and tell me in "lssues". Free use.
 
 This is an algorithm for building a "Case-Ctrl" matching cohort to minimize the influence of confusing variables.
@@ -49,7 +49,7 @@ pip install scikit-learn -i https://pypi.mirrors.ustc.edu.cn/simple/
 
 Install through PyPI:
 ```commandline
-pip install metaccm==0.2.0
+pip install metaccm==0.3.0
 ```
 Install through local:
 ```commandline
@@ -109,7 +109,7 @@ matchingVars(data: pd.DataFrame, label: str, matchVars: list[str], weight: list[
     5) Filter out negative samples that do not meet the requirements.
     6) If no suitable negative samples remain, remove the current positive sample and continue to the next iteration.
     7) Calculate a matching score for each remaining negative sample based on certain match variables and weights (Use the matchingScore function) .
-    8) Select the negative sample with the highest matching score.
+    8) Select the negative sample with the lowest matching score (closest).
     9) Assign pairID, matchType, and pair the positive and negative samples together.
     10) Add the matched pairs to separate dataframes and remove them from the sample pool.
     11) Concatenate the matched pairs dataframes, sort them by pairID, and return the balanced data.

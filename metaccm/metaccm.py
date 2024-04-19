@@ -1,3 +1,6 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+
 
 # import os
 import numpy as np
@@ -5,6 +8,8 @@ import pandas as pd
 from sklearn.preprocessing import MinMaxScaler
 from sklearn.preprocessing import LabelEncoder
 
+import random
+random.seed(2024)  # 用于弹出样本，设置随机种子，以保证结果可复现
 
 def logo():
     print("\n",
@@ -151,11 +156,13 @@ def matchingScore(negS: pd.DataFrame, posS: pd.DataFrame, weight: list[float]):
     # 计算数值型列的差值的平方
     diff_squared = (num_negS - num_posS) ** 2
 
-    # 计算字符型列的相等情况
-    char_equal = (char_negS == char_posS).astype(int)
+    # 计算字符型列的相等情况, 相同为0，不同为1
+    char_equal = (char_negS != char_posS).astype(int)
 
     # 合并数据框X和Y
     result = pd.concat([diff_squared, char_equal], axis=1)
+    # 恢复列名的顺序，与weight对应
+    result = result.reindex(columns=negS.columns)
 
     # 将weight转换为numpy数组
     weight = np.array(weight)
@@ -166,7 +173,7 @@ def matchingScore(negS: pd.DataFrame, posS: pd.DataFrame, weight: list[float]):
     # 返回NumPy数组
     return score
 
-
+#
 # data=data
 # sampleID='sampleID'
 # label='label'
@@ -189,7 +196,7 @@ def matchingVars(data: pd.DataFrame, label: str, matchVars: list[str], weight: l
     5) Filter out negative samples that do not meet the requirements.
     6) If no suitable negative samples remain, remove the current positive sample and continue to the next iteration.
     7) Calculate a matching score for each remaining negative sample based on certain match variables and weights.
-    8) Select the negative sample with the highest matching score.
+    8) Select the negative sample with the lowest matching score (closest).
     9) Assign pairID, matchType, and pair the positive and negative samples together.
     10) Add the matched pairs to separate dataframes and remove them from the sample pool.
     11) Concatenate the matched pairs dataframes, sort them by pairID, and return the balanced data.
@@ -248,9 +255,9 @@ def matchingVars(data: pd.DataFrame, label: str, matchVars: list[str], weight: l
             pos_var = pos_var.drop(pos_sample.index)
             continue
 
-        # 2) 在阴性样本中选取与阳性样本 match score 最大的样本
+        # 2) 在阴性样本中选取与阳性样本 match score 最小（最相近）的样本
         score = matchingScore(neg_samples[matchVars], pos_sample[matchVars], weight)
-        maxscore_neg_sample = neg_samples.iloc[np.argmax(score), :].to_frame().T
+        maxscore_neg_sample = neg_samples.iloc[np.argmin(score), :].to_frame().T
 
         # 为 pos_sample 和 maxscore_neg_sample 添加 'pairs' 和 'matchType' 信息
         pairID += 1

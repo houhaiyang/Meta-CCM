@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
 
 # Match Case-Ctrl samples according to sample phenotypes (variables) and their weights.
 # Including binary variables, nominal variables, ordinal variables, and scale variables.
@@ -13,7 +15,7 @@ metadata = pd.read_csv(csvPath, index_col=None)
 
 # Specify the variables to match
 confoundVars = ['bodySite', 'temperature', 'smokingFreq', 'BMI', 'colour', 'gender']
-weightVars = [0.5, 0.1, 0.2, 0.1, 0.05, 0.05]
+weightVars = [0.8, 0.05, 0.05, 0.025, 0.025, 0.05]
 varTypes = ['nominal', 'scale', 'ordinal', 'scale', 'nominal', 'binary']
 RequireDiffVar = ['weather']
 # Standardize variable values
