@@ -44,7 +44,7 @@ pip install metaccm
 ```
 Install through local:
 ```commandline
-pip install dist/metaccm-1.0.0-py3-none-any.whl
+pip install dist/metaccm-1.0.1-py3-none-any.whl
 ```
 
 -------------
