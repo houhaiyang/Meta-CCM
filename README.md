@@ -32,7 +32,7 @@ Refer to the "Main function explanation" section for algorithm design.
 -------------
 
 ## Installation
-Requirements: python>=3.11, numpy, pandas, scikit-learn.
+Requirements: python>=3.11, numpy, pandas, scikit-learn, statsmodels, peroxymanova==0.3.2.
 
 Pay attention to the installation of scikit-learn package.
 
