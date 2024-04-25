@@ -4,8 +4,7 @@
 
 # Meta-CCM
 
-[![PyPI - Downloads](https://img.shields.io/pypi/dm/metaccm?label=metaccm%20on%20PyPi)](https://pypi.org/project/metaccm/) 
-
+[![PyPI - Downloads](https://img.shields.io/badge/metaccm-Pypi-brightgreen)](https://pypi.org/project/metaccm/) 
 
 - Author: Haiyang Hou
 - Date: 2024-04-25
@@ -25,20 +24,20 @@ This is an algorithm for building a "Case-Ctrl" matching cohort to minimize the 
 
 ## Description
 
-This project is based on Python 3.11+ and developed using PyCharm 2024 on Windows 11.
+This project is based on `Python 3.11+` and developed using [PyCharm](https://www.jetbrains.com/pycharm/) 2024 on Windows 11.
 
 Refer to the "Main function explanation" section for algorithm design.
 
 -------------
 
 ## Installation
-Requirements: python>=3.11, numpy, pandas, scikit-learn, statsmodels, peroxymanova==0.3.2.
+Requirements: python>=3.11, `numpy`, `pandas`, `scikit-learn`, `statsmodels`, peroxymanova==0.3.2.
 
 Pay attention to the installation of scikit-learn package.
 
 ##### Install Meta-CCM
 
-Install through PyPI:
+Install through [PyPI](https://pypi.org/project/metaccm/) :
 ```commandline
 pip install metaccm
 ```
@@ -84,7 +83,7 @@ or set weight directly.
 weightVars = [1.5, 0.2, 0.5, 0.6, 0.4, 0.3]
 ```
 
-The varType can only take four values: ‘nominal’, ‘scale’, ‘ordinal’, and ‘binary’.
+The varType can only take four values: `nominal`, `scale`, `ordinal`, and `binary`.
 The weightVars are relative weights and can be any floating-point number.
 
 #### Example 1: One experiment of matching different types of variables
