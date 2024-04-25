@@ -8,9 +8,9 @@ from statsmodels.stats.multitest import multipletests
 
 def sigTest(data: pd.DataFrame, label: str, confoundVars: list[str], varType: list[str]):
     result_list = []  # 存储要添加到DataFrame的数据
-    for var,type in zip(confoundVars,varType):
-        # print(var,type)
-        if type == 'scale': # 连续型，使用 Mann-Whitney U检验
+    for var,vtype in zip(confoundVars,varType):
+        # print(var,vtype)
+        if vtype == 'scale': # 连续型，使用 Mann-Whitney U检验
             groupPos = data[data[label] == 1][var]
             groupNeg = data[data[label] == 0][var]
             # Mann-Whitney U检验, 比较两组独立样本数据之间的差异

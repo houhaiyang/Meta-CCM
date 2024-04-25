@@ -14,5 +14,3 @@ def permanovaSingle(abd, label):
     statistic, pVal = peroxymanova.permanova(dist ** 2, label.astype(np.uint))
 
     return statistic, pVal
-
-

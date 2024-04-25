@@ -6,7 +6,7 @@ created=now.strftime('%Y-%m-%d %H:%M:%S')
 
 setup(
     name='metaccm',
-    version='1.0.0',
+    version='1.0.1',
     python_requires='>=3.11',
     author='Haiyang Hou',
     author_email='2868582991@qq.com',

@@ -9,6 +9,7 @@ from sklearn.preprocessing import LabelEncoder
 import random
 random.seed(2024)  # 用于弹出样本，设置随机种子，以保证结果可复现
 
+
 def logo():
     print("\n",
           '\t', '            ._____  _______            ', '\n',
@@ -92,19 +93,19 @@ def standardizedVarValue(data, standardVars, varType):
     :return: (DataFrame) DataFrame after standardization.
     """
 
-    for var, type in zip(standardVars, varType):
-        # print(var, type)
-        # var, type = 'smokingFreq', 'ordinal'
+    for var, vtype in zip(standardVars, varType):
+        # print(var, vtype)
+        # var, vtype = 'smokingFreq', 'ordinal'
 
         vector = data[var].values
-        process_func = process_dict.get(type)
+        process_func = process_dict.get(vtype)
         normalized_vector = vector
         if process_func:
             normalized_vector = process_func(vector)
-            # print(f"Normalized {var} for type: {type}")
+            # print(f"Normalized {var} for vtype: {vtype}")
 
         else:
-            print(f"No processing function of {var} for type: {type}")
+            print(f"No processing function of {var} for type: {vtype}")
 
         data[var] = normalized_vector
 

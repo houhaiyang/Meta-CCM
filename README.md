@@ -9,7 +9,7 @@
 
 - Author: Haiyang Hou
 - Date: 2024-04-25
-- Version: v1.0.0
+- Version: v1.0.1
 - If you want to use this package, please indicate the source and tell me in "lssues". Free use.
 
 This is an algorithm for building a "Case-Ctrl" matching cohort to minimize the influence of confusing variables.
