@@ -28,6 +28,9 @@ def logo():
 
 
 def process_nominal(vector):
+    # 确保数组中的元素为字符串类型
+    vector = vector.astype(str)
+
     return vector
 
 
@@ -38,6 +41,8 @@ def process_scale(vector):
     normalized_vector = scaler.fit_transform(var_vector)
     # 将标准化后的向量再转换回一维数组
     normalized_vector = normalized_vector.flatten()
+
+    normalized_vector = normalized_vector.astype(float)
 
     return normalized_vector
 
@@ -50,6 +55,8 @@ def process_ordinal(vector):
     # 将标准化后的向量再转换回一维数组
     normalized_vector = normalized_vector.flatten()
 
+    normalized_vector = normalized_vector.astype(float)
+
     return normalized_vector
 
 
@@ -59,6 +66,8 @@ def process_binary(vector):
     encoded_vector = label_encoder.fit_transform(vector)
     # 将第一个类别映射为 0，第二个类别映射为 1
     normalized_vector = encoded_vector - encoded_vector.min()
+
+    normalized_vector = normalized_vector.astype(int)
 
     return normalized_vector
 
@@ -182,7 +191,7 @@ def matchingScore(negS: pd.DataFrame, posS: pd.DataFrame, weight: list[float]):
 # RequireDiffVar=RequireDiffVar
 
 # help(matchingVars)
-def matchingVars(data: pd.DataFrame, label: str, matchVars: list[str], weight: list[float], RequireDiffVar: list[str]):
+def matchingVars(data: pd.DataFrame, label: str, matchVars: list[str], weight: list[float], RequireDiffVar: list[str] = []):
     """
     This is a function to realize the matching algorithm, which matches positive and negative samples according to
     specific criteria.
@@ -220,7 +229,7 @@ def matchingVars(data: pd.DataFrame, label: str, matchVars: list[str], weight: l
     """
 
     logo()
-
+    random.seed(2024)
     # 保存匹配样本对的数据框
     matched_pos = pd.DataFrame() # 阳性样本池
     matched_neg = pd.DataFrame() # 阴性样本池
@@ -230,7 +239,7 @@ def matchingVars(data: pd.DataFrame, label: str, matchVars: list[str], weight: l
     # neg_var = neg_var.reset_index(drop=True)
 
     pairID = 0 # 初始化
-    matchType = 'matchingVars'
+    matchType = 'metaccm'
 
     for i in range(len(pos_var)):
         if len(pos_var) == 0 or len(neg_var) == 0:
@@ -239,17 +248,21 @@ def matchingVars(data: pd.DataFrame, label: str, matchVars: list[str], weight: l
         pos_sample = pos_var.sample()
         neg_samples = neg_var.copy()
 
-        # 1) 查看限定条件 RequireDiffVar，选择与阳性样本 RequireDiffVar 不一样的阴性样本
-        for difVar in RequireDiffVar:
-            # print(difVar)
-            # 将 neg_samples[difVar] 和 pos_sample[difVar] 的值转换为集合
-            # neg_set = set(neg_samples[difVar])
-            pos_set = set(pos_sample[difVar])
-            # 找出 neg_samples[difVar] 中不在 pos_sample[difVar] 中的值的位置
-            indices = [j for j, val in enumerate(neg_samples[difVar]) if val not in pos_set]
-            # 根据 indices 列表提取出符合条件的行
-            # iloc方法是根据行的位置（整数位置）来进行选择，而不是根据行的索引（标签）来选择。
-            neg_samples = neg_samples.iloc[indices]
+        if RequireDiffVar == [] or len(RequireDiffVar) == 0 :
+            continue
+        else:
+            # 1) 查看限定条件 RequireDiffVar，选择与阳性样本 RequireDiffVar 不一样的阴性样本
+            for difVar in RequireDiffVar:
+                # print(difVar)
+                # 将 neg_samples[difVar] 和 pos_sample[difVar] 的值转换为集合
+                # neg_set = set(neg_samples[difVar])
+                pos_set = set(pos_sample[difVar])
+                # 找出 neg_samples[difVar] 中不在 pos_sample[difVar] 中的值的位置
+                indices = [j for j, val in enumerate(neg_samples[difVar]) if val not in pos_set]
+                # 根据 indices 列表提取出符合条件的行
+                # iloc方法是根据行的位置（整数位置）来进行选择，而不是根据行的索引（标签）来选择。
+                neg_samples = neg_samples.iloc[indices]
+
         if len(neg_samples) == 0:
             # 没有符合条件的阴性样本，从样本池中移除当前阳性样本
             pos_var = pos_var.drop(pos_sample.index)

@@ -1,0 +1,10 @@
+# python>=3.11
+
+numpy
+pandas
+scipy
+joblib
+scikit-learn
+statsmodels
+# peroxymanova==0.3.2
+
