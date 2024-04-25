@@ -13,7 +13,14 @@
 
 This is an algorithm for building a "Case-Ctrl" matching cohort to minimize the influence of confusing variables.
 
-## Current function
+
+## Description
+
+This project is based on `Python 3.11+` and developed using [PyCharm](https://www.jetbrains.com/pycharm/) 2024 on Windows 11.
+
+Refer to the "Main function explanation" section for algorithm design.
+
+### Current function
 
 * Used to construct a "Case-Ctrl" matching cohort.
 
@@ -21,12 +28,6 @@ This is an algorithm for building a "Case-Ctrl" matching cohort to minimize the 
 
 * Support different variable types
 
-
-## Description
-
-This project is based on `Python 3.11+` and developed using [PyCharm](https://www.jetbrains.com/pycharm/) 2024 on Windows 11.
-
-Refer to the "Main function explanation" section for algorithm design.
 
 -------------
 
